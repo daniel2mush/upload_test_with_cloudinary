@@ -109,8 +109,9 @@ export default function UploadFile() {
       }
       toast.success(message);
       console.log(data, "Upload data");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      toast.error(error.message);
     } finally {
       setIsUploading(false);
       setUploadProgress(0);
