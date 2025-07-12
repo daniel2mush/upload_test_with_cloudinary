@@ -27,6 +27,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { UploadToDatabaseAction } from "@/app/actions/databaseAction";
 import { toast } from "sonner";
+import { getSignature } from "@/app/actions/cloudinary";
 
 interface uploadProps {
   signature: string;
@@ -34,11 +35,7 @@ interface uploadProps {
   apiKey: string;
 }
 
-interface uploadFileProps {
-  uploadProps: uploadProps;
-}
-
-export default function UploadFile({ uploadProps }: uploadFileProps) {
+export default function UploadFile() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
@@ -67,13 +64,17 @@ export default function UploadFile({ uploadProps }: uploadFileProps) {
 
   async function UploadHandler(params: uploadFormTypes) {
     setIsUploading(true);
+    const now = new Date();
+    const timestamp = Math.floor(now.getTime() / 1000);
+    const { data, status, message } = await getSignature(timestamp);
+
     const folder = "upload-test";
     const formData = new FormData();
     formData.append("file", params.file);
     formData.append("folder", folder);
-    formData.append("api_key", uploadProps.apiKey);
-    formData.append("signature", uploadProps.signature);
-    formData.append("timestamp", uploadProps.timestamp.toString());
+    formData.append("api_key", data.apiKey);
+    formData.append("signature", data.signature);
+    formData.append("timestamp", timestamp.toString());
 
     try {
       const cloudinaryRes = await axios.post(
