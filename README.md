@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Efficient File Upload with Axios, Drizzle, PostgreSQL & Zod
 
-## Getting Started
+This project demonstrates a **minimal, efficient, and modern** file upload flow using:
 
-First, run the development server:
+- **Axios** for frontend uploads with progress tracking
+- **Zod** for safe schema validation
+- **PostgreSQL** + **Drizzle ORM** for metadata persistence
+- **Next.js API routes** or **Node.js backend** for processing
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📦 Tech Stack
+
+- **Frontend**: Next.js (App Router) + Axios
+- **Validation**: Zod
+- **Backend**: Node.js/Next.js API route
+- **Database**: PostgreSQL
+- **ORM**: Drizzle ORM
+- **Cloud Storage**: Cloudinary (can be replaced with any service)
+
+---
+
+## 🔁 Upload Flow Overview
+
+1. **User selects a file** from a form.
+2. **Zod validates** the file client-side.
+3. File is uploaded directly from the **frontend using Axios**, with real-time progress tracking.
+4. Upload response (file URL, public ID, etc.) is sent to the backend via a POST request.
+5. **Zod validates the metadata** on the backend.
+6. Metadata is **stored in PostgreSQL** using Drizzle ORM.
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── app/
+│ └── upload/ # Frontend upload page
+├── lib/
+│ └── drizzle/ # Drizzle ORM setup and schema
+│ └── utils/ # Cloudinary helpers (signature, upload)
+├── actions/
+│ └── upload.ts # Function to upload metadata to DB
+├── api/
+│ └── cloudinary/ # Signature or direct upload endpoint
+└── components/
+└── UploadForm.tsx # File input, validation, and Axios upload
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Clone & Install
 
-## Learn More
+```bash
+git clone https://github.com/yourname/efficient-upload-demo.git
+cd efficient-upload-demo
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2.Setup`.env`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+DATABASE_URL=postgres://user:password@localhost:5432/dbname
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+NEXT_PUBLIC_CLOUD_NAME=your_cloud_name
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
 
-## Deploy on Vercel
+### 3. Run app
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+
+**_ ✅ Benefits _**
+🔒 Type-safe from frontend to database
+
+⚡ Fast uploads with real-time progress
+
+🧼 Clean separation of logic and UI
+
+🔍 Zod catches invalid data early
+
+💾 Drizzle gives full control over SQL schema
+
+**_ 🛠️ Future Enhancements _**
+✅ Multiple file uploads
+
+✅ Role-based upload restrictions
+
+✅ File size limits server-side
+
+✅ Image optimization and thumbnails
+
+Let me know if you want it to include a **live demo**, **deployment notes**, or **how to seed the database**.
