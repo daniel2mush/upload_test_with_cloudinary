@@ -55,7 +55,7 @@ src/
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/yourname/efficient-upload-demo.git
+git clone https://github.com/daniel2mush/upload_test_with_cloudinary.git
 cd efficient-upload-demo
 npm install
 ```
@@ -78,7 +78,8 @@ npm run dev
 
 ```
 
-**_ ✅ Benefits _**
+## ✅ Benefits
+
 🔒 Type-safe from frontend to database
 
 ⚡ Fast uploads with real-time progress
@@ -89,7 +90,10 @@ npm run dev
 
 💾 Drizzle gives full control over SQL schema
 
-**_ 🛠️ Future Enhancements _**
+---
+
+## 🛠️ Future Enhancements
+
 ✅ Multiple file uploads
 
 ✅ Role-based upload restrictions
@@ -97,5 +101,7 @@ npm run dev
 ✅ File size limits server-side
 
 ✅ Image optimization and thumbnails
+
+---
 
 Let me know if you want it to include a **live demo**, **deployment notes**, or **how to seed the database**.
